@@ -41,3 +41,60 @@
 .nav-link:focus {
   color: #747bff;
 }
+
+/*& Стилі для таймера */
+
+#datetime-picker {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.timer {
+  display: flex;
+  align-items: center;
+}
+
+.field {
+  text-align: center;
+}
+
+.value {
+  font-size: 20px;
+}
+
+.label {
+  font-size: 12px;
+}
+
+/*! Стилі для Snackbar */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  margin-top: 50px;
+
+}
+
+label {
+  margin-bottom: 10px;
+}
+
+fieldset {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+input[type="number"],
+input[type="radio"] {
+  margin-right: 10px;
+}
