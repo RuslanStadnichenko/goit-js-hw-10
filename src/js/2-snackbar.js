@@ -9,14 +9,12 @@ const submitButton = form.querySelector('button[type="submit"]');
 function showMessage(state, delay) {
   if (state === 'fulfilled') {
     iziToast.success({
-      title: 'Success',
       message: `✅ Fulfilled promise in ${delay}ms`,
       position: 'topRight',
       timeout: delay
     });
   } else if (state === 'rejected') {
     iziToast.error({
-      title: 'Error',
       message: `❌ Rejected promise in ${delay}ms`,
       position: 'topRight',
       timeout: delay
@@ -32,7 +30,6 @@ form.addEventListener('submit', function(event) {
   
   if (!selectedState) {
     iziToast.error({
-      title: 'Error',
       message: 'Please select a state',
       position: 'topRight'
     });
