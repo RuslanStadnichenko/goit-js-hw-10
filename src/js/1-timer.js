@@ -1,10 +1,6 @@
-// Описаний в документації
 import flatpickr from "flatpickr";
-// Додатковий імпорт стилів
 import "flatpickr/dist/flatpickr.min.css";
-// Описаний у документації
 import iziToast from "izitoast";
-// Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
 const startButton = document.querySelector('[data-start]');
@@ -15,6 +11,7 @@ const dataMinutes = document.querySelectorAll('[data-minutes]');
 const dataSeconds = document.querySelectorAll('[data-seconds]');
 
 let timerInterval;
+startButton.disabled = true;
 
 const options = {
   enableTime: true,
@@ -31,7 +28,6 @@ const options = {
         message: 'Please choose a date in the future',
         position: 'topRight'
       });
-      startButton.disabled = true;
     } else {
        startButton.disabled = false;
     }
@@ -41,7 +37,7 @@ const options = {
 flatpickr("#datetime-picker", options);
 
 startButton.addEventListener('click', () => {
- let selectedDate = flatpickr.parseDate(inputData.value);
+  let selectedDate = flatpickr.parseDate(inputData.value);
   let currentDate = new Date();
 
   if (selectedDate <= currentDate) {
