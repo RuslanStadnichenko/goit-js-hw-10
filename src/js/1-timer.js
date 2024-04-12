@@ -21,7 +21,7 @@ const options = {
     let userSelectedDate = selectedDates[0];
     let currentDate = new Date();
 
-    if (userSelectedDate <= currentDate) {
+    if (userSelectedDate < currentDate) {
       iziToast.error({
         title: 'Error',
         message: 'Please choose a date in the future',
@@ -39,7 +39,7 @@ startButton.addEventListener('click', () => {
   let selectedDate = flatpickr.parseDate(inputData.value);
   let currentDate = new Date();
 
-  if (selectedDate <= currentDate) {
+  if (selectedDate < currentDate) {
     iziToast.error({
       title: 'Error',
       message: 'Please choose a date in the future',
