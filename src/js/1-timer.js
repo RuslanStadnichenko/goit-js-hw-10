@@ -21,7 +21,7 @@ const options = {
     let userSelectedDate = selectedDates[0];
     let currentDate = new Date();
 
-    if (userSelectedDate < currentDate) {
+    if (userSelectedDate <= currentDate) {
       iziToast.error({
         title: 'Error',
         message: 'Please choose a date in the future',
@@ -54,11 +54,6 @@ startButton.addEventListener('click', () => {
   function updateTimer() {
     const { days, hours, minutes, seconds } = convertMs(timeRemaining);
 
-    dataDays.forEach(el => el.textContent = addLeadingZero(days));
-    dataHours.forEach(el => el.textContent = addLeadingZero(hours));
-    dataMinutes.forEach(el => el.textContent = addLeadingZero(minutes));
-    dataSeconds.forEach(el => el.textContent = addLeadingZero(seconds));
-
     if (timeRemaining <= 0) {
       clearInterval(timerInterval);
       iziToast.success({
@@ -67,16 +62,22 @@ startButton.addEventListener('click', () => {
         position: 'topRight'
       });
       inputData.disabled = false;
+    } else {
+    dataDays.forEach(el => el.textContent = addLeadingZero(days));
+    dataHours.forEach(el => el.textContent = addLeadingZero(hours));
+    dataMinutes.forEach(el => el.textContent = addLeadingZero(minutes));
+    dataSeconds.forEach(el => el.textContent = addLeadingZero(seconds));
     }
 
     timeRemaining -= 1000;
   }
 
- 
+  updateTimer();
+
   timerInterval = setInterval(updateTimer, 1000);
 });
 
-updateTimer();
+
  
 
 function convertMs(ms) {

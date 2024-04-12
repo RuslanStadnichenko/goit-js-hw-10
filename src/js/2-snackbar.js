@@ -10,14 +10,12 @@ function showMessage(state, delay) {
   if (state === 'fulfilled') {
     iziToast.success({
       message: `✅ Fulfilled promise in ${delay}ms`,
-      position: 'topRight',
-      timeout: delay
+      position: 'topRight'
     });
   } else if (state === 'rejected') {
     iziToast.error({
       message: `❌ Rejected promise in ${delay}ms`,
-      position: 'topRight',
-      timeout: delay
+      position: 'topRight'
     });
   }
 }
