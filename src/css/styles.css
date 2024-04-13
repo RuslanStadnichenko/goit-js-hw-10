@@ -4,8 +4,6 @@
   | default @import url()
   |============================
 */
-@import "flatpickr/dist/flatpickr.min.css";
-@import "izitoast/dist/css/iziToast.min.css";
 @import url('./reset.css');
 
 :root {

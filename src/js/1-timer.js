@@ -1,6 +1,7 @@
-import flatpickr from "flatpickr";
-import iziToast from "izitoast";
-
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 const startButton = document.querySelector('[data-start]');
 const inputData = document.querySelector("#datetime-picker");
@@ -48,7 +49,8 @@ startButton.addEventListener('click', () => {
     startButton.disabled = true;
       return;
   }
-
+     startButton.disabled = true;
+     inputData.disabled = true;
   let timeRemaining = selectedDate - currentDate;
 
   function updateTimer() {
@@ -62,6 +64,10 @@ startButton.addEventListener('click', () => {
         position: 'topRight'
       });
       inputData.disabled = false;
+      dataDays.forEach(el => el.textContent = '00');
+      dataHours.forEach(el => el.textContent = '00');
+      dataMinutes.forEach(el => el.textContent = '00');
+      dataSeconds.forEach(el => el.textContent = '00');
     } else {
     dataDays.forEach(el => el.textContent = addLeadingZero(days));
     dataHours.forEach(el => el.textContent = addLeadingZero(hours));
