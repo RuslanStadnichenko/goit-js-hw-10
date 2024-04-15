@@ -5,12 +5,14 @@ import 'izitoast/dist/css/iziToast.min.css';
 
 const startButton = document.querySelector('[data-start]');
 const inputData = document.querySelector("#datetime-picker");
-const dataDays = document.querySelectorAll('[data-days]');
-const dataHours = document.querySelectorAll('[data-hours]');
-const dataMinutes = document.querySelectorAll('[data-minutes]');
-const dataSeconds = document.querySelectorAll('[data-seconds]');
+const dataDays = document.querySelector('[data-days]');
+const dataHours = document.querySelector('[data-hours]');
+const dataMinutes = document.querySelector('[data-minutes]');
+const dataSeconds = document.querySelector('[data-seconds]');
 
 let timerInterval;
+let userSelectedDate;
+
 startButton.disabled = true;
 
 const options = {
@@ -19,7 +21,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    let userSelectedDate = selectedDates[0];
+    userSelectedDate = selectedDates[0];
     let currentDate = new Date();
 
     if (userSelectedDate < currentDate) {
@@ -28,6 +30,7 @@ const options = {
         message: 'Please choose a date in the future',
         position: 'topRight'
       });
+       startButton.disabled = true;
     } else {
        startButton.disabled = false;
     }
@@ -37,21 +40,19 @@ const options = {
 flatpickr("#datetime-picker", options);
 
 startButton.addEventListener('click', () => {
-  let selectedDate = flatpickr.parseDate(inputData.value);
-  let currentDate = new Date();
-
-  if (selectedDate < currentDate) {
+  if (!userSelectedDate || userSelectedDate < new Date()) {
     iziToast.error({
       title: 'Error',
-      message: 'Please choose a date in the future',
+      message: 'Please choose a valid future date',
       position: 'topRight'
-    }),
-    startButton.disabled = true;
-      return;
+    });
+    return;
   }
-     startButton.disabled = true;
-     inputData.disabled = true;
-  let timeRemaining = selectedDate - currentDate;
+
+  
+  startButton.disabled = true;
+  inputData.disabled = true;
+  let timeRemaining = userSelectedDate - new Date();
 
   function updateTimer() {
     const { days, hours, minutes, seconds } = convertMs(timeRemaining);
@@ -63,16 +64,16 @@ startButton.addEventListener('click', () => {
         message: 'Countdown timer has finished!',
         position: 'topRight'
       });
-      inputData.disabled = false;
-      dataDays.forEach(el => el.textContent = '00');
-      dataHours.forEach(el => el.textContent = '00');
-      dataMinutes.forEach(el => el.textContent = '00');
-      dataSeconds.forEach(el => el.textContent = '00');
+       inputData.disabled = false;
+      dataDays.textContent = '00';
+      dataHours.textContent = '00';
+      dataMinutes.textContent = '00';
+      dataSeconds.textContent = '00';
     } else {
-    dataDays.forEach(el => el.textContent = addLeadingZero(days));
-    dataHours.forEach(el => el.textContent = addLeadingZero(hours));
-    dataMinutes.forEach(el => el.textContent = addLeadingZero(minutes));
-    dataSeconds.forEach(el => el.textContent = addLeadingZero(seconds));
+      dataDays.textContent = addLeadingZero(days);
+      dataHours.textContent = addLeadingZero(hours);
+      dataMinutes.textContent = addLeadingZero(minutes);
+      dataSeconds.textContent = addLeadingZero(seconds);
     }
 
     timeRemaining -= 1000;
